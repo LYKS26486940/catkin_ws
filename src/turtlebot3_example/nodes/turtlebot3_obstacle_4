@@ -1,0 +1,90 @@
+#!/usr/bin/env python
+#################################################################################
+# Copyright 2018 ROBOTIS CO., LTD.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#################################################################################
+
+# Authors: Gilbert #
+
+import rospy
+from std_msgs.msg import Float32
+from sensor_msgs.msg import LaserScan
+from geometry_msgs.msg import Twist
+
+class Obstacle():
+    def __init__(self):
+        self.LIDAR_ERR = 0.05
+        #self.scan1=rospy.Publisher('aaa',Float32,queue_size=1)
+        #self.scan2=rospy.Publisher('bbb',Float32,queue_size=1)
+        #self.scan3=rospy.Publisher('ccc',Float32,queue_size=1)
+        self.scan4=rospy.Publisher('ddd',Float32,queue_size=1)
+        #rospy.Subscriber("chatter",Int32,self.callback)
+        self.obstacle()   
+    def get_scan(self):
+        #print("1")
+        msg = rospy.wait_for_message("scan", LaserScan)
+        self.scan_filter = []
+        for i in range(360):
+            if i <= 70 and i > 0:
+                if msg.ranges[i] >= self.LIDAR_ERR:
+                    self.scan_filter.append(msg.ranges[i])
+    def get_scan2(self):
+        #print("2")
+        msg = rospy.wait_for_message("scan", LaserScan)
+        self.scan_filter2 = []
+        for ii in range(360):
+            if ii > 290 and ii < 360:
+                if msg.ranges[ii] >= self.LIDAR_ERR:
+                    self.scan_filter2.append(msg.ranges[ii])
+    def get_scan3(self):
+        #print("3")
+        msg = rospy.wait_for_message("scan", LaserScan)
+        self.scan_filter3 = []
+        for iii in range(360):
+            if iii <= 100 and iii >70:
+                if msg.ranges[iii] >= self.LIDAR_ERR:
+                    self.scan_filter3.append(msg.ranges[iii])
+    def get_scan4(self):
+        #print("4")
+        msg = rospy.wait_for_message("scan", LaserScan)
+        self.scan_filter4 = []
+        for iiii in range(360):
+            if iiii <= 290 and iiii > 260:
+                if msg.ranges[iiii] >= self.LIDAR_ERR:
+                    self.scan_filter4.append(msg.ranges[iiii])          
+        
+    def obstacle(self):
+        while not rospy.is_shutdown():
+            # self.get_scan()
+            # self.get_scan2()
+            # self.get_scan3()
+             self.get_scan4()
+            # rospy.loginfo("data=%s",min(self.scan_filter))
+            # rospy.loginfo("data=%s",min(self.scan_filter2))
+            # rospy.loginfo("data=%s",min(self.scan_filter3))
+            # rospy.loginfo("data=%s",min(self.scan_filter4))
+            # self.scan1.publish(min(self.scan_filter))
+            # self.scan2.publish(min(self.scan_filter2))
+            # self.scan3.publish(min(self.scan_filter3))
+             self.scan4.publish(min(self.scan_filter4))
+def main():
+    rospy.init_node('turtlebot3_obstacle_laser4')
+    try:
+	rospy.loginfo("obstacle_4 ready")
+        obstacle = Obstacle()
+    except rospy.ROSInterruptException:
+        pass
+
+if __name__ == '__main__':
+    main()

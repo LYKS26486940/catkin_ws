@@ -1,0 +1,8 @@
+<launch>
+  <node pkg="track" type="topic_image" name="topic_image" output="screen">
+  </node>
+  <node pkg="track" type="topic_image_1" name="topic_image_1" output="screen">
+  </node>
+  <node pkg="track" type="shoot" name="shoot" output="screen">
+  </node>
+</launch>

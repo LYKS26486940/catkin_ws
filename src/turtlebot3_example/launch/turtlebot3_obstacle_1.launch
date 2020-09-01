@@ -1,0 +1,10 @@
+<launch>
+  <node pkg="turtlebot3_example" type="turtlebot3_obstacle_1" name="turtlebot3_obstacle_1" output="screen">
+  </node>
+  <node pkg="turtlebot3_example" type="turtlebot3_obstacle_2" name="turtlebot3_obstacle_2" output="screen">
+  </node>
+  <node pkg="turtlebot3_example" type="turtlebot3_obstacle_3" name="turtlebot3_obstacle_3" output="screen">
+  </node>
+  <node pkg="turtlebot3_example" type="turtlebot3_obstacle_4" name="turtlebot3_obstacle_4" output="screen">
+  </node>
+</launch>
